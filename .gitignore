@@ -1,0 +1,7 @@
+.env
+.coverage
+.coveragerc
+staticfiles/
+media/
+htmlcov/
+db.sqlite3
