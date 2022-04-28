@@ -1,7 +1,7 @@
 from pprint import pprint
 from django.shortcuts import render
 from django.views.generic.base import TemplateView
-from pages.models import Article
+from pages.models import Article, Saver, Withdrawal, Deposit, OTP
 from django.http import JsonResponse
 
 
@@ -67,13 +67,12 @@ def get_database_model_data(request):
                     if option in database_model_data[model.__name__][str(field)].keys(): # Check if key exists i.e. was passed as an argument when initializing the field
                         # Key exists, continue                       
                         new_field_option_dict[option] = database_model_data[model.__name__][str(field)][option]
-                new_field_option_dict['className'] = repr(field)
+                new_field_option_dict['className'] = str(repr(field))[1:-1]
                 database_model_data[model.__name__][str(field)] = new_field_option_dict  # Replace the options dictionary with the newly created one           
             
                 
         return database_model_data
-    #pprint(get_fields_and_properties([Article]))
-    return JsonResponse(get_fields_and_properties([Article]), safe=False)
+    return JsonResponse(get_fields_and_properties([Article, Saver, Withdrawal, Deposit, OTP]), safe=False)
     #model = models[0]
     #field_names = [f.name for f in model._meta.fields]
     #print(model._meta.fields, '\n')
